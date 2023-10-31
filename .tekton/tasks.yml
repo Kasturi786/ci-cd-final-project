@@ -4,7 +4,7 @@ metadata:
   name: cleanup
 spec:
   workspaces:
-    name: source
+    - name: source
   steps:
     - name: remove
       image: alpine:3
@@ -38,17 +38,17 @@ metadata:
   name: nose
 spec:
   workspaces:
-    name: source
+    - name: source
   params:
-    name: args
-    description: Argument to pass to nose
-    type: string
-    default: -v
+    - name: args
+      description: Argument to pass to nose
+      type: string
+      default: -v
   steps:
-   - name: nosetests
-     image: python:3.9-slim
-     workingDir: $(workspaces.source.path)
-     script: |
+    - name: nosetests
+      image: python:3.9-slim
+      workingDir: $(workspaces.source.path)
+      script: |
         #!/bin/bash
         set -e
         python -m pip install --upgrade pip wheel
